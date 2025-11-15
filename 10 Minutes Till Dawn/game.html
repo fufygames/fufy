@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<base href="https://cdn.jsdelivr.net/gh/a456pur/seraph@ae2fcc6d6a9cd0519080db1f79cf2a7/games/10minutestilldawn/">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>10 Minutes Till Dawn</title>
+
+    <script src="Build/UnityLoader.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #unityContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+    <script>
+        let unityInstance;
+
+        function resizeGame() {
+            const ww = window.innerWidth;
+            const wh = window.innerHeight;
+
+            const gameW = 1200;
+            const gameH = 675;
+
+            const scale = Math.min(ww / gameW, wh / gameH);
+
+            const cont = document.getElementById("unityContainer");
+            cont.style.width = gameW * scale + "px";
+            cont.style.height = gameH * scale + "px";
+        }
+
+        window.addEventListener("resize", resizeGame);
+
+        window.addEventListener("DOMContentLoaded", () => {
+            unityInstance = UnityLoader.instantiate(
+                "unityContainer",
+                "Build/10MinutesTillDawnWebGL.json"
+            );
+            resizeGame();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="unityContainer"></div>
+</body>
+</html>
